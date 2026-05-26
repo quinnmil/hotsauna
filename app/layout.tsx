@@ -18,6 +18,7 @@ const locationName = process.env.LOCATION_NAME ?? "hotsauna";
 export const metadata: Metadata = {
   title: locationName,
   description: "Is the sauna lit?",
+  icons: process.env.ICON_URL ? { icon: process.env.ICON_URL } : undefined,
 };
 
 export default function RootLayout({

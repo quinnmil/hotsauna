@@ -29,7 +29,7 @@ export function LightForm({ isLit = false }: { isLit?: boolean }) {
         name="name"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="your name (optional)"
+        placeholder="your name (if you want)"
         maxLength={60}
         disabled={pending}
         autoComplete="given-name"
