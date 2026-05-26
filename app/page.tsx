@@ -13,13 +13,19 @@ export default async function Home() {
     .select()
     .from(sessions)
     .orderBy(desc(sessions.litAt))
-    .limit(1);
+    .limit(2);
 
   const latest = rows[0];
+  const previous = rows[1];
   const litAtIso = latest ? new Date(latest.litAt).toISOString() : null;
   const isLit =
     !!latest &&
     Date.now() - new Date(latest.litAt).getTime() < LIT_THRESHOLD_MS;
+  const wasStoke =
+    !!latest &&
+    !!previous &&
+    new Date(latest.litAt).getTime() - new Date(previous.litAt).getTime() <
+      LIT_THRESHOLD_MS;
   const displayName = latest?.name?.trim() || FALLBACK_NAME;
   const locationName = process.env.LOCATION_NAME ?? "hotsauna";
 
@@ -36,7 +42,7 @@ export default async function Home() {
           {isLit && litAtIso ? (
             <>
               <h1 className="font-serif text-4xl leading-tight text-ember">
-                Lit by {displayName}
+                {wasStoke ? "Stoked" : "Lit"} by {displayName}
               </h1>
               <p className="font-serif text-lg italic text-muted">
                 <RelativeTime iso={litAtIso} />
@@ -60,7 +66,7 @@ export default async function Home() {
           )}
         </section>
 
-        <LightForm />
+        <LightForm isLit={isLit} />
       </main>
     </div>
   );

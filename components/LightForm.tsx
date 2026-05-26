@@ -5,9 +5,11 @@ import { lightSauna } from "@/app/actions";
 
 const STORAGE_KEY = "hotsauna:name";
 
-export function LightForm() {
+export function LightForm({ isLit = false }: { isLit?: boolean }) {
   const [name, setName] = useState("");
   const [, formAction, pending] = useActionState(lightSauna, null);
+  const idleLabel = isLit ? "Stoke the fire" : "Light the fire";
+  const pendingLabel = isLit ? "Stoking…" : "Lighting…";
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -38,7 +40,7 @@ export function LightForm() {
         disabled={pending}
         className="w-full rounded-lg bg-ember px-4 py-4 text-base font-medium text-[#faf6ee] transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-60"
       >
-        {pending ? "Lighting…" : "Light the fire"}
+        {pending ? pendingLabel : idleLabel}
       </button>
     </form>
   );

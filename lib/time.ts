@@ -17,6 +17,6 @@ export function formatRelative(date: Date | string, now: Date = new Date()): str
   return then.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
-export const LIT_THRESHOLD_MS = 4 * 60 * 60 * 1000;
+export const LIT_THRESHOLD_MS = 2 * 60 * 60 * 1000;
 
 export const FALLBACK_NAME = "a friendly Saunoja";
