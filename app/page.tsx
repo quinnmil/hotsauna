@@ -18,7 +18,8 @@ export default async function Home() {
   const latest = rows[0];
   const litAtIso = latest ? new Date(latest.litAt).toISOString() : null;
   const isLit =
-    !!latest && Date.now() - new Date(latest.litAt).getTime() < LIT_THRESHOLD_MS;
+    !!latest &&
+    Date.now() - new Date(latest.litAt).getTime() < LIT_THRESHOLD_MS;
   const displayName = latest?.name?.trim() || FALLBACK_NAME;
   const locationName = process.env.LOCATION_NAME ?? "hotsauna";
 
@@ -52,7 +53,7 @@ export default async function Home() {
                 </p>
               ) : (
                 <p className="font-serif text-lg italic text-muted">
-                  No one has lit it yet
+                  Lets change that
                 </p>
               )}
             </>
