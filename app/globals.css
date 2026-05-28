@@ -28,3 +28,66 @@ body {
     font-family: var(--font-sans), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
+
+.fire-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        color-mix(in oklab, var(--ember) 22%, transparent),
+        color-mix(in oklab, var(--ember) 5%, transparent) 12%,
+        transparent 28%
+    );
+    animation: fire-pulse 5s ease-in-out infinite;
+    will-change: opacity;
+}
+
+@keyframes fire-pulse {
+    0%,
+    100% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.spark {
+    position: absolute;
+    bottom: -8px;
+    background: var(--ember);
+    border-radius: 9999px;
+    opacity: 0;
+    box-shadow: 0 0 6px color-mix(in oklab, var(--ember) 70%, transparent);
+    animation-name: spark-rise;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-out;
+    will-change: transform, opacity;
+}
+
+@keyframes spark-rise {
+    0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+    }
+    8% {
+        opacity: 0.85;
+    }
+    70% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate3d(var(--spark-drift, 0px), -105vh, 0);
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fire-glow {
+        animation: none;
+        opacity: 0.85;
+    }
+    .spark {
+        display: none;
+    }
+}

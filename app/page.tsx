@@ -2,6 +2,7 @@ import { desc } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { sessions } from "@/lib/schema";
 import { FALLBACK_NAME, LIT_THRESHOLD_MS } from "@/lib/time";
+import { FireBackground } from "@/components/FireBackground";
 import { LightForm } from "@/components/LightForm";
 import { Poller } from "@/components/Poller";
 import { RelativeTime } from "@/components/RelativeTime";
@@ -31,6 +32,7 @@ export default async function Home() {
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-md flex-col px-6 pt-10 pb-12">
+      {isLit && <FireBackground />}
       <Poller />
 
       <header className="font-serif text-base tracking-tight text-muted">
