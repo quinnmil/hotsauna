@@ -53,15 +53,9 @@ export default async function Home() {
               <h1 className="font-serif text-4xl leading-tight text-foreground">
                 The sauna is cold
               </h1>
-              {latest && litAtIso ? (
-                <p className="font-serif text-lg italic text-muted">
-                  Last lit <RelativeTime iso={litAtIso} /> by {displayName}
-                </p>
-              ) : (
-                <p className="font-serif text-lg italic text-muted">
-                  Lets change that
-                </p>
-              )}
+              <p className="font-serif text-lg italic text-muted">
+                Lets change that
+              </p>
             </>
           )}
         </section>
